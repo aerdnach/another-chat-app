@@ -1,7 +1,7 @@
 const socket = io()
 
 // Elements
-const $messageForm = document.querySelector('#message-form') 
+const $messageForm = document.querySelector('#message-form')
 const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButton = $messageForm.querySelector('button')
 const $sendLocationButton = document.querySelector('#send-location')
@@ -13,18 +13,18 @@ const locationMessageTemplate = document.querySelector('#location-message-templa
 
 socket.on('message', (message) => {
     console.log(message)
-    
     const html = Mustache.render(messageTemplate, {
-        message
+        message: message.text,
+        createdAt: moment(message.createdAt).format('h:mm:ss a')
     })
-    
     $messages.insertAdjacentHTML('beforeend', html)
 })
 
-socket.on('locationMessage', (url) => {
-    console.log(url)
+socket.on('locationMessage', (message) => {
+    console.log(message)
     const html = Mustache.render(locationMessageTemplate, {
-        url
+        url: message.url,
+        createdAt: moment(message.createdAt).format('h:mm:ss a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
 })
@@ -44,25 +44,25 @@ $messageForm.addEventListener('submit', (e) => {
         if (error) {
             return console.log(error)
         }
-        console.log('The message was delivered')
+
+        console.log('Message delivered!')
     })
 })
 
 $sendLocationButton.addEventListener('click', () => {
     if (!navigator.geolocation) {
-        return alert("Geolocation is not supported by your browser!")
+        return alert('Geolocation is not supported by your browser.')
     }
 
     $sendLocationButton.setAttribute('disabled', 'disabled')
 
     navigator.geolocation.getCurrentPosition((position) => {
-        socket
-            .emit('sendLocation', {
-                latitude: position.coords.latitude, 
-                longitude: position.coords.longitude
-            }, () => {
-                $sendLocationButton.removeAttribute('disabled')
-                console.log('Location shared!')
-            })
+        socket.emit('sendLocation', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        }, () => {
+            $sendLocationButton.removeAttribute('disabled')
+            console.log('Location shared!')  
+        })
     })
 })

@@ -71,7 +71,11 @@ button:disabled {
     box-shadow: 0px 0px 17px 1px #1D1F26;
     background: #F7F7FA;
     padding: 24px;
-    width: 250px;
+    width: 400px;
+}
+
+.centered-form__box form {
+    margin-top: 1em;
 }
 
 .centered-form button {
@@ -181,3 +185,28 @@ button:disabled {
     font-weight: 300;
     padding: 12px 24px 0 24px;
 }
+
+#created_by {
+    position: fixed;
+    display: block;
+    bottom: 0;
+    padding: 1em;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: #333744 !important;
+}
+
+#created_by_sidebar {
+    position: fixed;
+    display: block;
+    bottom: 0;
+    padding: 1em;
+    text-align: center;
+    color: white;
+    background-color: #333744 !important;
+}
+
+#created_by a:link, #created_by_sidebar a:link { color: whitesmoke}
+#created_by a:visited, #created_by_sidebar a:visited { color: rgb(159, 144, 226)}
+#created_by a:hover, #created_by_sidebar a:hover { color: rgb(202, 196, 230)}

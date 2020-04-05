@@ -13,3 +13,7 @@ Create a config folder in project root, in this dir create a file named dev.env.
 PORT=3000
 
 Run *npm install* in project root.
+
+Run *npm run dev* in project root to launch. 
+
+Visit 127.0.0.1:3000.

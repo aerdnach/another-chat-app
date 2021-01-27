@@ -1,7 +1,7 @@
 # Dependency directories
 node_modules/
 config/
-
+/.history
 # Optional npm cache directory
 .npm
 
